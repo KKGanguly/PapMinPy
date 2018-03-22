@@ -58,7 +58,7 @@ class CitationExtractor:
             citationSnippetJsons=[]
             for citationSnippet in citationSnippets:
                 citationSnippetJsons.append(self.convertToJson(citationSnippet))
-            return citationSnippetJsons
+            return self.convertToJsonDefault(citationSnippetJsons)
         return citationSnippets
     def find(self,f, seq):
         for item in seq:
@@ -66,6 +66,8 @@ class CitationExtractor:
               return item
     def convertToJson(self,obj):
         return json.dumps(obj.toJSON(), cls=JSONEncoder)
+    def convertToJsonDefault(self,obj):
+        return json.dumps(obj)
     def getReferences(self,json=False):
         references=self.soup.find_all('ref')
         referenceList=[]
@@ -118,6 +120,7 @@ class CitationExtractor:
             referenceListJsons=[]
             for reference in referenceList:
                 referenceListJsons.append(self.convertToJson(reference))
-            return referenceListJsons
+            return self.convertToJsonDefault(referenceListJsons)
         return referenceList
-        
+ce=CitationExtractor("condense.pdf")
+print ce.getReferences(json=True)

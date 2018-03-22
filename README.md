@@ -13,8 +13,8 @@ This project uses [CERMINE](https://github.com/CeON/CERMINE) java library for it
 
 First, create the CitationExtractor object with the following code.
 ```python
-from PapMinPy import citationextractor.CitationExtractor
-citationExtractor=CitationExtractor("pdfFileName.pdf")
+from PapMinPy import citationextractor
+citationExtractor=citationextractor.CitationExtractor("pdfFileName.pdf")
 ```
 Now, the references can be extracted using the following code.
 ```python
@@ -26,7 +26,7 @@ citationExtractor.getReferences(False)
 ```
 The citation snippets (paragraphs containing a specific citation) can be found utilizing - 
 ```python
-citationExtractor.getCitationSnippets(True)
+citationExtractor.getCitationSnippets(json=True)
 ```
 ## Release History
 
