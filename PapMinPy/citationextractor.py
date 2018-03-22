@@ -120,8 +120,4 @@ class CitationExtractor:
                 referenceListJsons.append(self.convertToJson(reference))
             return referenceListJsons
         return referenceList
-citation=CitationExtractor("2.pdf")
-snippets=citation.getCitationSnippets(json=True)
-for snippet in snippets:
-    print snippet
         
