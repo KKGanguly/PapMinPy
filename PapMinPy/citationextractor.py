@@ -105,7 +105,6 @@ class CitationExtractor:
                 print ('toPage not present')
             referenceList.append(extractedReference)
         return referenceList
-citation=CitationExtractor("2.pdf")
 
     
         
