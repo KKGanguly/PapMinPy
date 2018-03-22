@@ -1,4 +1,5 @@
 from author import Author
+import json
 class Reference:
     id=""
     authors=[]
@@ -8,6 +9,10 @@ class Reference:
     volume=""
     fromPage=""
     toPage=""
+    def __init__(self):
+        self.authors = []
+    def toJSON(self):
+        return dict(id=self.id, authors=self.authors, year=self.year, articleTitle=self.articleTitle, source=self.source, volume=self.volume, fromPage=self.fromPage, toPage=self.toPage)
     def __str__(self):
         string=''
         string+=self.getNoneSafeString(self.id)+" "

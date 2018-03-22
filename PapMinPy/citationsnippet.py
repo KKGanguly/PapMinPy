@@ -3,3 +3,5 @@ class CitationSnippet:
     paragraphs=[]
     def __init__(self):
         self.paragraphs = []
+    def toJSON(self):
+        return dict(edgeId=self.edgeId,paragraphs=self.paragraphs)

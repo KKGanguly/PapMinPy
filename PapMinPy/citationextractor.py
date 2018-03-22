@@ -8,6 +8,8 @@ import os
 import subprocess
 import requests
 from requests.exceptions import RequestException
+import json
+from jsonencoder import JSONEncoder
 class CitationExtractor:
     soup=None
     def __init__(self,pdf):
@@ -28,7 +30,7 @@ class CitationExtractor:
     def writeXml(self,output,pdf):
         with open(pdf+".xml", 'w') as xmlFile:
             xmlFile.write(output)
-    def getCitationSnippets(self,references):
+    def getCitationSnippets(self,references=None,json=False):
         candidateParagraphs=[]
         citationSnippets=[]
         paragraphs = self.soup.find_all('p')
@@ -52,12 +54,19 @@ class CitationExtractor:
                     if(formattedPara not in citationSnippet.paragraphs):
                         citationSnippet.paragraphs.append(formattedPara)
                     citationSnippets.append(citationSnippet)
+        if json is True:
+            citationSnippetJsons=[]
+            for citationSnippet in citationSnippets:
+                citationSnippetJsons.append(self.convertToJson(citationSnippet))
+            return citationSnippetJsons
         return citationSnippets
     def find(self,f, seq):
         for item in seq:
             if f(item): 
               return item
-    def getReferences(self):
+    def convertToJson(self,obj):
+        return json.dumps(obj.toJSON(), cls=JSONEncoder)
+    def getReferences(self,json=False):
         references=self.soup.find_all('ref')
         referenceList=[]
         for reference in references:
@@ -84,7 +93,8 @@ class CitationExtractor:
             except AttributeError:
                 print ('year not present')
             try:
-                extractedReference.articleTitle=reference.find('article-title').get_text().encode("utf-8")
+                extractedReference.articleTitle=reference.find_all('article-title')[-1].get_text().encode("utf-8")
+                print(extractedReference.articleTitle)
             except AttributeError:
                 print ('article title not present')
             try:
@@ -104,7 +114,14 @@ class CitationExtractor:
             except AttributeError:
                 print ('toPage not present')
             referenceList.append(extractedReference)
+        if json is True:
+            referenceListJsons=[]
+            for reference in referenceList:
+                referenceListJsons.append(self.convertToJson(reference))
+            return referenceListJsons
         return referenceList
-
-    
+citation=CitationExtractor("2.pdf")
+snippets=citation.getCitationSnippets(json=True)
+for snippet in snippets:
+    print snippet
         
