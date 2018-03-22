@@ -18,15 +18,15 @@ citationExtractor=CitationExtractor("pdfFileName.pdf")
 ```
 Now, the references can be extracted using the following code.
 ```python
-citationExtractor.getReferences(json=True)
+citationExtractor.getReferences(True)
 ```
 To get the output as objects, rather than JSONs, simply use -
 ```python
-citationExtractor.getReferences(json=False)
+citationExtractor.getReferences(False)
 ```
 The citation snippets (paragraphs containing a specific citation) can be found utilizing - 
 ```python
-citationExtractor.getCitationSnippets(json=False)
+citationExtractor.getCitationSnippets(True)
 ```
 ## Release History
 
