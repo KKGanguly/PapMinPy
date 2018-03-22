@@ -122,5 +122,3 @@ class CitationExtractor:
                 referenceListJsons.append(self.convertToJson(reference))
             return self.convertToJsonDefault(referenceListJsons)
         return referenceList
-ce=CitationExtractor("condense.pdf")
-print ce.getReferences(json=True)
