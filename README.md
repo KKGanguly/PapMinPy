@@ -8,7 +8,7 @@ Paper Miner (PapMinPy) is a library to extract information from academic paper P
 ```sh
 pip install git+https://github.com/KKGanguly/PapMinPy
 ```
-
+This project uses [CERMINE](https://github.com/CeON/CERMINE) java library for its purpose, so [JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) must be installed.
 ## Usage example
 
 First, create the CitationExtractor object with the following code.
