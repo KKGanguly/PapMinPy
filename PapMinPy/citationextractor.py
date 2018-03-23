@@ -58,14 +58,15 @@ class CitationExtractor:
             citationSnippetJsons=[]
             for citationSnippet in citationSnippets:
                 citationSnippetJsons.append(self.convertToJson(citationSnippet))
-            return self.convertToJsonDefault(citationSnippetJsons)
+            return self.convertToJson(citationSnippets)
+                
         return citationSnippets
     def find(self,f, seq):
         for item in seq:
             if f(item): 
               return item
     def convertToJson(self,obj):
-        return json.dumps(obj.toJSON(), cls=JSONEncoder)
+        return json.dumps(obj, cls=JSONEncoder,indent=4, sort_keys=True)
     def convertToJsonDefault(self,obj):
         return json.dumps(obj)
     def getReferences(self,json=False):
@@ -120,5 +121,5 @@ class CitationExtractor:
             referenceListJsons=[]
             for reference in referenceList:
                 referenceListJsons.append(self.convertToJson(reference))
-            return self.convertToJsonDefault(referenceListJsons)
+            return self.convertToJson(referenceList)
         return referenceList
